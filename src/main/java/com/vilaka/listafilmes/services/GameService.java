@@ -3,6 +3,7 @@ package com.vilaka.listafilmes.services;
 import com.vilaka.listafilmes.dto.GameDto;
 import com.vilaka.listafilmes.dto.GameMinDto;
 import com.vilaka.listafilmes.entities.Game;
+import com.vilaka.listafilmes.projections.GameMinProjection;
 import com.vilaka.listafilmes.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,11 @@ public class GameService {
         Game result = gameRepository.findById(id).get();
         GameDto dto = new GameDto(result);
         return dto;
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDto> findByList(Long listId){
+        List<GameMinProjection> result =  gameRepository.searchByList(listId);
+        return result.stream().map(GameMinDto::new).toList();
     }
  }

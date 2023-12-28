@@ -1,6 +1,7 @@
 package com.vilaka.listafilmes.dto;
 
 import com.vilaka.listafilmes.entities.Game;
+import com.vilaka.listafilmes.projections.GameMinProjection;
 
 public class GameMinDto {
     private Long id;
@@ -19,6 +20,13 @@ public class GameMinDto {
         shortDescription = entity.getShortDescription();
     }
 
+    public GameMinDto(GameMinProjection projection){
+        id = projection.getId();
+        title = projection.getTitle();
+        year = projection.getYear();
+        imgUrl = projection.getImgUrl();
+        shortDescription = projection.getShortDescription();
+    }
     public Long getId() {
         return id;
     }

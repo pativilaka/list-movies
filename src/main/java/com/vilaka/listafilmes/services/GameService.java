@@ -22,7 +22,7 @@ public class GameService {
         return result.stream().map(GameMinDto::new).toList();
     }
 
-    @Transactional(readOnly = true)
+      @Transactional(readOnly = true)
     public GameDto findById(Long id){
         Game result = gameRepository.findById(id).get();
         GameDto dto = new GameDto(result);
